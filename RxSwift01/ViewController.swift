@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import RxSwift
 
-class ViewController: UIViewController, CharacterDelegate {
+class ViewController: UIViewController { //, CharacterDelegate {
     
     @IBOutlet weak var greetingsLabel: UILabel!
+    
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +24,11 @@ class ViewController: UIViewController, CharacterDelegate {
     @IBAction func selectCharacter(_ sender: Any) {
         
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
-        detailVC.delegate = self
-        
+        //detailVC.delegate = self
+        detailVC.selectedCharacter
+            .subscribe(onNext: { [weak self] character in
+                self?.greetingsLabel.text = "Hello \(character)"
+            }).disposed(by: disposeBag)
         
         navigationController?.pushViewController(detailVC, animated: true)
         
