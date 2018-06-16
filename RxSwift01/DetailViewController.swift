@@ -22,7 +22,14 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
     }
-
+    
+    
+    /**
+     * 디스크립션
+     * @param 파라미터
+     * @returns 리턴
+     */
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
